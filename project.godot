@@ -13,3 +13,7 @@ config_version=5
 config/name="Two Racers Multiplayer"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Lobby="*res://server/lobby.gd"

@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" path="res://server/lobby.gd" id="1_1hegi"]
 
-[node name="lobby" type="Control"]
+[node name="Lobby" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_1hegi")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="Button" type="Button" parent="CenterContainer"]
+[node name="ConnectButton" type="Button" parent="CenterContainer"]
 layout_mode = 2
 text = "Connect"
+
+[connection signal="pressed" from="CenterContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
