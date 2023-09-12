@@ -27,6 +27,7 @@ func create_game():
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
+	return OK
 
 # When the server decides to start the game from a UI scene, do Lobby.load_game.rpc(filepath)
 @rpc("call_local", "reliable")
@@ -57,6 +58,14 @@ func _register_player(new_player_info):
 func _on_connect_button_pressed():
 	var game = create_game()
 	if game == OK:
+		print("Game started")
 		# change to main game scene
-		pass
-	print("Game init failed")
+		get_tree().change_scene_to_file("res://game_root.tscn")
+	else:
+		print("Game init failed")
+		$InfoLabel.text = "Game init failed with: " + str(game)
+	
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()

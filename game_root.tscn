@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://jx2m8e8r73v"]
+
+[ext_resource type="Script" path="res://game_root.gd" id="1_1pgw3"]
+[ext_resource type="Texture2D" uid="uid://dmk51p1mmj7rf" path="res://files/Background/background_0010.png" id="1_wba8u"]
+[ext_resource type="Texture2D" uid="uid://bru1e4yrgu6n1" path="res://files/Characters/character_0008.png" id="2_w3poq"]
+[ext_resource type="Script" path="res://PlayerRoot.gd" id="3_qbn11"]
+[ext_resource type="Texture2D" uid="uid://ninmt7q47eeu" path="res://files/Blocks/Marble/tile_0000.png" id="4_hiwcl"]
+[ext_resource type="Script" path="res://AcceleratorRoot.gd" id="4_tslag"]
+[ext_resource type="Script" path="res://DeceleratorRoot.gd" id="7_s0o3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71wi5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnlu8"]
+
+[node name="GameRoot" type="Node2D"]
+script = ExtResource("1_1pgw3")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="World"]
+position = Vector2(576.5, 323.5)
+scale = Vector2(47.9583, 26.7917)
+texture = ExtResource("1_wba8u")
+
+[node name="Node2D" type="Node2D" parent="World"]
+
+[node name="PlayerRoot" type="Node2D" parent="."]
+script = ExtResource("3_qbn11")
+
+[node name="Player" type="Area2D" parent="PlayerRoot"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerRoot/Player"]
+position = Vector2(267, 212)
+shape = SubResource("RectangleShape2D_71wi5")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerRoot/Player"]
+position = Vector2(267, 212)
+texture = ExtResource("2_w3poq")
+
+[node name="Label" type="Label" parent="PlayerRoot/Player"]
+offset_left = 263.0
+offset_top = 171.0
+offset_right = 370.0
+offset_bottom = 197.0
+text = "Accelerator: 0"
+
+[node name="AcceleratorRoot" type="Node2D" parent="."]
+position = Vector2(-559, 87)
+script = ExtResource("4_tslag")
+
+[node name="Sprite2D" type="Sprite2D" parent="AcceleratorRoot"]
+position = Vector2(863, 124)
+texture = ExtResource("4_hiwcl")
+
+[node name="Accelerator" type="Area2D" parent="AcceleratorRoot"]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AcceleratorRoot/Accelerator"]
+position = Vector2(863, 124)
+shape = SubResource("RectangleShape2D_jnlu8")
+
+[node name="DeceleratorRoot" type="Node2D" parent="."]
+position = Vector2(-660, 88)
+script = ExtResource("7_s0o3u")
+
+[node name="Sprite2D" type="Sprite2D" parent="DeceleratorRoot"]
+position = Vector2(863, 124)
+texture = ExtResource("4_hiwcl")
+
+[node name="Decelerator" type="Area2D" parent="DeceleratorRoot"]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeceleratorRoot/Decelerator"]
+position = Vector2(863, 124)
+shape = SubResource("RectangleShape2D_jnlu8")
+
+[connection signal="area_entered" from="PlayerRoot/Player" to="." method="_on_player_area_entered"]
+[connection signal="area_entered" from="AcceleratorRoot/Accelerator" to="." method="_on_accelerator_area_entered"]
+[connection signal="area_entered" from="DeceleratorRoot/Decelerator" to="." method="_on_decelerator_area_entered"]
