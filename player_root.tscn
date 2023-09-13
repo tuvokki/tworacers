@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxqwdvyovsppx"]
+
+[ext_resource type="Script" path="res://PlayerRoot.gd" id="1_1qhsx"]
+[ext_resource type="Texture2D" uid="uid://bru1e4yrgu6n1" path="res://files/Characters/character_0008.png" id="2_vn2g5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71wi5"]
+
+[node name="PlayerRoot" type="Node2D"]
+script = ExtResource("1_1qhsx")
+
+[node name="Player" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(267, 212)
+shape = SubResource("RectangleShape2D_71wi5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(267, 212)
+texture = ExtResource("2_vn2g5")
+
+[node name="Label" type="Label" parent="Player"]
+offset_left = 263.0
+offset_top = 171.0
+offset_right = 370.0
+offset_bottom = 197.0
+text = "Accelerator: 0"
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

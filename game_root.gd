@@ -24,3 +24,10 @@ func _on_decelerator_area_entered(area):
 
 	var dec = get_node("DeceleratorRoot")
 	dec.new_pos()
+
+func _on_tree_entered():
+	print("GameRoot enetered tree.")
+	var player = load("res://player_root.tscn")
+	var instance = player.instantiate()
+	add_child(instance)
+

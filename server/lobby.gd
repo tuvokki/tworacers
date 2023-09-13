@@ -1,5 +1,7 @@
 extends Control
 
+var Player = preload("res://player_root.tscn")
+
 # These signals can be connected to by a UI lobby scene or the game scene.
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -56,11 +58,16 @@ func _register_player(new_player_info):
 
 
 func _on_connect_button_pressed():
+	get_tree().change_scene_to_file("res://game_root.tscn")
+
+	
+func _on_host_button_pressed():
 	var game = create_game()
 	if game == OK:
 		print("Game started")
+		$InfoLabel.text = "Game init OK"
 		# change to main game scene
-		get_tree().change_scene_to_file("res://game_root.tscn")
+		#get_tree().change_scene_to_file("res://game_root.tscn")
 	else:
 		print("Game init failed")
 		$InfoLabel.text = "Game init failed with: " + str(game)
@@ -69,3 +76,10 @@ func _on_connect_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_player_disconnected(peer_id):
+	pass # Replace with function body.
+
+func _on_tree_entered():
+	print("Lobby enetered tree.")

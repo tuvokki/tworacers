@@ -24,6 +24,7 @@ func _process(_delta):
 		var peer_id = peer.get_unique_id()
 		print("Client peerId: " + str(peer_id))
 		_is_connected = true
+		$"/root/Lobby"._register_player.rpc()
 	else:
 		get_node("Player").visible = true
 
@@ -56,3 +57,7 @@ func _unhandled_input(event):
 		"InputEventKey":
 			if Input.is_action_just_pressed("ui_accept"):
 				print(get_process_delta_time())
+
+
+func _on_tree_entered():
+	print("Player enetered tree.")

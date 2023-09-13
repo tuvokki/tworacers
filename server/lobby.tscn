@@ -1,11 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://c206lwsviv1kl"]
+[gd_scene load_steps=3 format=3 uid="uid://c206lwsviv1kl"]
 
 [ext_resource type="Script" path="res://server/lobby.gd" id="1_1hegi"]
+[ext_resource type="Texture2D" uid="uid://dmk51p1mmj7rf" path="res://files/Background/background_0010.png" id="2_srns6"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_1hegi")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="World"]
+position = Vector2(576.5, 323.5)
+scale = Vector2(47.9583, 26.7917)
+texture = ExtResource("2_srns6")
+
+[node name="Node2D" type="Node2D" parent="World"]
 
 [node name="InfoLabel" type="Label" parent="."]
 layout_mode = 2
@@ -33,5 +43,18 @@ offset_bottom = 356.0
 layout_mode = 2
 text = "Quit"
 
+[node name="CenterContainer3" type="CenterContainer" parent="."]
+offset_top = 245.0
+offset_right = 1152.0
+offset_bottom = 276.0
+
+[node name="HostButton" type="Button" parent="CenterContainer3"]
+layout_mode = 2
+text = "Host"
+
+[connection signal="player_connected" from="." to="." method="_on_player_connected"]
+[connection signal="player_disconnected" from="." to="." method="_on_player_disconnected"]
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="pressed" from="CenterContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
 [connection signal="pressed" from="CenterContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer3/HostButton" to="." method="_on_host_button_pressed"]
