@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd5mh5ukf3wo1"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_nd7s5"]
+[ext_resource type="Texture2D" uid="uid://bhpntgd5f3qpj" path="res://scenes/characters_packed.png" id="2_dcctq"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3bxsi"]
+properties/0/path = NodePath(".:peer_id")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = false
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:character_tile")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uerfa"]
+texture = ExtResource("2_dcctq")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3ggfp"]
+tile_size = Vector2i(24, 24)
+sources/1 = SubResource("TileSetAtlasSource_uerfa")
+
+[sub_resource type="SystemFont" id="SystemFont_i4oir"]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_nd7s5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.2
+delta_interval = 0.2
+replication_config = SubResource("SceneReplicationConfig_3bxsi")
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = 1
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_3ggfp")
+format = 2
+layer_0/name = "base"
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(0, 524289, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 25.0
+offset_right = 71.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_i4oir")
+theme_override_font_sizes/font_size = 10
+text = "09384756"
+horizontal_alignment = 1
