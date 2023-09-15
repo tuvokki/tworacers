@@ -149,7 +149,6 @@ delta_interval = 0.2
 replication_config = SubResource("SceneReplicationConfig_kkrqj")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_left = -8.0
 offset_top = -16.0
 offset_right = 38.0

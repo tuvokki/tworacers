@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const SPEED_BUMP: int = 10
+const SPEED = 100.0
+const SPEED_BUMP: int = 50
 var _accelerator: int = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -13,7 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	set(value):
 		peer_id = value
 		name = "Hunter " + str(peer_id)
-		$Label.text = str(peer_id)
+		#$Label.text = str(peer_id)
 		set_multiplayer_authority(peer_id)
 
 # Character tile.
@@ -34,6 +34,14 @@ func _ready():
 	set_physics_process(is_local)
 	set_process(is_local)
 	add_to_group("hunters")
+
+func _process(_delta):
+	var accelerated_SPEED = SPEED + _accelerator
+	$Label.text = str(accelerated_SPEED)
+	if accelerated_SPEED <= 0:
+		get_node("/root/Main/Label").text = name + " Lost"
+		get_node("/root/Main/Label").show()
+
 
 func _physics_process(_delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -56,9 +64,11 @@ func _physics_process(_delta):
 	if collision:
 		if collision.get_collider().name == "TargetTileMap":
 			if collision.get_collider().get_parent().name == "Accelerator":
-				_accelerator += SPEED_BUMP
+				if _accelerator < 200:
+					_accelerator += SPEED_BUMP
 			if collision.get_collider().get_parent().name == "Decelerator":
-				_accelerator -= SPEED_BUMP
+				if _accelerator > -100:
+					_accelerator -= SPEED_BUMP
 			collision.get_collider().get_parent().new_pos()
 			
 			#var targets = get_tree().get_nodes_in_group("targets")
