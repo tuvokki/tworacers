@@ -23,6 +23,7 @@ Game="*res://scenes/game.gd"
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
+window/size/resizable=false
 
 [filesystem]
 

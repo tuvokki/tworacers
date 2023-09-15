@@ -44,18 +44,20 @@ func spawn_player(id: int):
 	player.position = get_random_position()
 	player.character_tile = get_random_character_tile()
 	players.add_child(player, true)
-	player.rpc("hello", "spawned player " + str(player.peer_id))
+	#player.rpc("hello", "spawned player " + str(player.peer_id))
 
 func spawn_target(type):
 	var target = preload("res://scenes/target.tscn").instantiate()
+	# naming them all the same might not be scalable, otoh an ACC or DEC always does the same
 	if type == types.ACC:
-		target.character_tile = Vector2i(6,1)
+		target.character_tile = Vector2i(4,2)
+		target.name = "Accelerator"
 	else:
-		target.character_tile = Vector2i(6,2)
+		target.character_tile = Vector2i(7,3)
+		target.name = "Decelerator"
 	target.type = type
 	target.position = get_random_position()
 	targets.add_child(target)
-	add_to_group("targets")
 
 func remove_player(id: int):
 	if not players.has_node(str(id)):
@@ -66,7 +68,7 @@ func get_random_position():
 	var screenSize = get_viewport().get_visible_rect().size
 	var rng = RandomNumberGenerator.new()
 	var rndX = rng.randi_range(0, screenSize.x)
-	var rndY = rng.randi_range(0, screenSize.y / 2)
+	var rndY = rng.randi_range(0, screenSize.y)
 	return Vector2(rndX, rndY)
 
 func get_random_character_tile():
