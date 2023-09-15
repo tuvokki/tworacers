@@ -32,9 +32,7 @@ func _ready():
 	set_process(is_local)
 
 func _process(_delta):
-	# Handle mouse capture.
-	if Input.is_action_just_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE else Input.MOUSE_MODE_VISIBLE
+	pass
 
 func _input(event):	
 	if(event.is_action("move_right")):
