@@ -13,3 +13,7 @@ func _on_connect_pressed():
 	peer.create_client("localhost", Game.PORT)
 	multiplayer.multiplayer_peer = peer
 	Game.load_map()
+
+func _input(event):	
+	if(event.is_action("ui_accept")):
+		_on_connect_pressed()

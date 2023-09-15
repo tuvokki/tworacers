@@ -1,7 +1,24 @@
-[gd_scene format=3 uid="uid://sep8yi1qvnof"]
+[gd_scene load_steps=2 format=3 uid="uid://sep8yi1qvnof"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_wgmhv"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_wgmhv")
 
 [node name="Players" type="Node" parent="."]
 
 [node name="Targets" type="Node" parent="."]
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_right = 69.0
+offset_bottom = 23.0
+text = "Test"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 500.0
+offset_top = 367.0
+offset_right = 540.0
+offset_bottom = 390.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
