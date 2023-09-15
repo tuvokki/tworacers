@@ -137,8 +137,10 @@ physics_layer_0/collision_layer = 2
 sources/1 = SubResource("TileSetAtlasSource_uerfa")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ns4t0"]
+radius = 13.0
 
 [node name="hunter" type="CharacterBody2D"]
+input_pickable = true
 script = ExtResource("1_663u7")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -147,6 +149,7 @@ delta_interval = 0.2
 replication_config = SubResource("SceneReplicationConfig_kkrqj")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -8.0
 offset_top = -16.0
 offset_right = 38.0
@@ -166,3 +169,6 @@ layer_0/tile_data = PackedInt32Array(0, 524289, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 12)
 shape = SubResource("CircleShape2D_ns4t0")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

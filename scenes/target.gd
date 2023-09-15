@@ -27,11 +27,15 @@ func new_pos():
 	move_local_y(random.randi_range(-50, 50))
 
 func _physics_process(_delta):
-	var velocity = Vector2( 0, 0 ) # no movement
-	var collision = move_and_collide(velocity, true)
+	pass
+	#var velocity = Vector2( 0, 0 ) # no movement
+	#var collision = move_and_collide(velocity, true)
 	#if collision and collision.get_collider() == get_node("TargetTileMap"):
 	#	# Are we the baddies now?
 	#	var collision_target = collision.get_collider().get_parent().type
 	#	print("Target Collision -> ", collision_target)
-	if collision:
-		pass
+	#if collision and collision.get_collider() != get_node("TargetTileMap"):
+	#	var collision_target = collision.get_collider().name # == the id of the player hitting
+	#	print("!Target Collision -> ", collision_target)
+	#	new_pos()
+	

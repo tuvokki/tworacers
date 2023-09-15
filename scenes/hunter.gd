@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+var _accelerator: int = 50
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -11,7 +12,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var peer_id : int : 
 	set(value):
 		peer_id = value
-		name = str(peer_id)
+		name = "Hunter " + str(peer_id)
 		$Label.text = str(peer_id)
 		set_multiplayer_authority(peer_id)
 
@@ -34,10 +35,6 @@ func _ready():
 	set_process(is_local)
 
 func _physics_process(_delta):
-	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept"):
-		velocity.y = JUMP_VELOCITY
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
@@ -55,12 +52,21 @@ func _physics_process(_delta):
 
 	var collision = get_last_slide_collision()
 	if collision:
-		if collision.get_collider().get_parent().type == get_node("/root/Game").types.ACC:
-			#print("Collided with accelerator")
-			pass
-		else:
-			#print("Collided with decelerator")
-			pass
-	#for i in get_slide_collision_count():
-	#	var collision = get_slide_collision(i)
-	#	print("Collided with: ", collision.collider.name)
+		#var targets = get_tree().get_nodes_in_group("targets")
+		if collision.get_collider().is_in_group("targets"):
+			print("Hit target")
+#		if collision.get_collider() == get_node("/root/Main/Targets/Target/TargetTileMap"):
+#			print("Hit target")
+#			var collider_target = collision.get_collider().get_parent()
+#			if collider_target.type == Game.types.ACC:
+#				if _accelerator < 250:
+#					_accelerator += 50
+#			if collider_target.type == Game.types.DEC:
+#				if _accelerator > 0:
+#					_accelerator -= 50
+
+func _on_mouse_entered():
+	$Label.show()
+
+func _on_mouse_exited():
+	$Label.hide()
