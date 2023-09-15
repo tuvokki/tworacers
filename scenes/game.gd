@@ -39,12 +39,12 @@ func load_map():
 	spawn_target(types.DEC)
 
 func spawn_player(id: int):
-	var player = preload("res://scenes/player.tscn").instantiate()
+	var player = preload("res://scenes/hunter.tscn").instantiate()
 	player.peer_id = id
 	player.position = get_random_position()
 	player.character_tile = get_random_character_tile()
 	players.add_child(player, true)
-	player.rpc("hello", "spawned player " + str(player.peer_id))
+	#player.rpc("hello", "spawned player " + str(player.peer_id))
 
 func spawn_target(type):
 	var target = preload("res://scenes/target.tscn").instantiate()
